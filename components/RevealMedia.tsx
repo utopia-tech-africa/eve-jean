@@ -54,7 +54,7 @@ export function RevealMedia({
     return () => observer.disconnect();
   }, [reduceMotion]);
 
-  const style: CSSProperties = reduceMotion
+  const style: CSSProperties | undefined = reduceMotion
     ? undefined
     : {
         opacity: visible ? 1 : 0,
