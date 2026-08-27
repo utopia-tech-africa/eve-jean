@@ -315,7 +315,7 @@ export function WorkSection() {
   ).flat();
 
   return (
-    <section className="relative flex h-screen w-full shrink-0 flex-col overflow-hidden bg-forest">
+    <section className="relative flex h-screen w-full shrink-0 flex-col gap-6 overflow-hidden bg-forest">
       <div
         className="pointer-events-none absolute inset-0 mix-blend-soft-light"
         aria-hidden
