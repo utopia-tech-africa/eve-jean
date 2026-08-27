@@ -1,5 +1,5 @@
 type ReachOutButtonProps = {
-  variant?: "outline" | "filled";
+  variant?: "outline" | "cta";
   className?: string;
 };
 
@@ -7,19 +7,21 @@ export function ReachOutButton({
   variant = "outline",
   className = "",
 }: ReachOutButtonProps) {
-  const isFilled = variant === "filled";
+  const isCta = variant === "cta";
 
   return (
     <button
       type="button"
       aria-disabled="true"
-      className={`group w-[117px] rounded-[4px] border transition-opacity hover:opacity-90 ${
-        isFilled ? "border-[rgba(21,21,21,0.3)]" : "border-white"
+      className={`group rounded-[4px] border transition-opacity hover:opacity-90 ${
+        isCta
+          ? "border-[rgba(21,21,21,0.3)] p-1"
+          : "w-[117px] border-white"
       } ${className}`}
     >
       <span
         className={`flex w-full items-center justify-center rounded-[4px] px-3 py-2 font-[family-name:var(--font-instrument)] text-[16px] font-normal leading-normal text-white transition-colors ${
-          isFilled
+          isCta
             ? "bg-accent group-hover:bg-[#354828]"
             : "bg-transparent"
         }`}
