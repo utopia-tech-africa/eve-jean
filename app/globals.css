@@ -29,7 +29,6 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     overflow-x: hidden;
   }
 
@@ -41,10 +40,6 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-
     *,
     *::before,
     *::after {
