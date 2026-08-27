@@ -56,7 +56,7 @@ export function ProcessSection() {
       </div>
 
       <div className="absolute left-[50px] top-[114px] h-[618px] w-[1340px]">
-        <h2 className="absolute left-0 top-[-30px] w-[352px] font-[family-name:var(--font-display)] text-[48px] leading-[1.2] uppercase text-white">
+        <h2 className="absolute left-0 top-[-30px] w-[352px] font-display text-[48px] leading-[1.2] uppercase text-white">
           We handle all the complexity
         </h2>
 
