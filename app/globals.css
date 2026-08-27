@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #fffbf2;
+  --forest: #091200;
+  --accent: #2a381e;
+  --ink: #151515;
+  --white: #ffffff;
+  --muted-white: rgba(255, 255, 255, 0.8);
+  --muted-ink: rgba(21, 21, 21, 0.8);
+}
+
+@theme inline {
+  --color-cream: var(--cream);
+  --color-forest: var(--forest);
+  --color-accent: var(--accent);
+  --color-ink: var(--ink);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-instrument);
+  --font-montserrat: var(--font-montserrat);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-instrument), system-ui, sans-serif;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out both;
+}
+
+.animate-rise-in {
+  animation: rise-in 0.9s ease-out both;
+}
+
+.animate-rise-in-delay {
+  animation: rise-in 0.9s ease-out 0.15s both;
+}
