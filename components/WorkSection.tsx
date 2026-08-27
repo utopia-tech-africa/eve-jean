@@ -315,7 +315,7 @@ export function WorkSection() {
   ).flat();
 
   return (
-    <section className="relative h-[846px] w-full shrink-0 overflow-hidden bg-forest">
+    <section className="relative flex h-screen w-full shrink-0 flex-col overflow-hidden bg-forest">
       <div
         className="pointer-events-none absolute inset-0 mix-blend-soft-light"
         aria-hidden
@@ -329,13 +329,13 @@ export function WorkSection() {
         />
       </div>
 
-      <h2 className="pointer-events-none absolute left-[50px] top-8 z-10 w-[318px] font-display text-[48px] leading-[1.2] uppercase text-white">
+      <h2 className="relative z-10 max-w-[450px] shrink-0 px-[50px] pt-8 font-display text-[48px] leading-[1.2] uppercase text-white">
         Work that speaks for us
       </h2>
 
       <div
         ref={wrapperRef}
-        className="pointer-events-none absolute inset-x-0 top-[172px] bottom-[30px] overflow-x-hidden overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="pointer-events-none relative z-10 min-h-0 flex-1 overflow-x-hidden overflow-y-hidden pb-[30px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         <div
           ref={contentRef}
