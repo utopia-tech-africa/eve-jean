@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans, Montserrat } from "next/font/google";
 import localFont from "next/font/local";
+import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
 
 const display = localFont({
@@ -43,7 +44,7 @@ export default function RootLayout({
       <body
         className={`${instrument.className} min-h-full overflow-x-hidden bg-cream text-ink`}
       >
-        {children}
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );
