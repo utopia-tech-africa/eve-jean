@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans, Montserrat } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import "./globals.css";
@@ -19,12 +19,6 @@ const instrument = Instrument_Sans({
   display: "swap",
 });
 
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["500", "700"],
-});
-
 export const metadata: Metadata = {
   title: "Eve Jean",
   description:
@@ -39,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${display.variable} ${instrument.variable} ${montserrat.variable} h-full antialiased`}
+      className={`${display.variable} ${instrument.variable} h-full antialiased`}
     >
       <body
         className={`${instrument.className} min-h-full overflow-x-hidden bg-cream text-ink`}

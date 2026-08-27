@@ -17,7 +17,6 @@
   --color-ink: var(--ink);
   --font-display: var(--font-display);
   --font-sans: var(--font-instrument);
-  --font-montserrat: var(--font-montserrat);
 }
 
 /* Astetes display headings — 1px stroke matches fill via currentColor */
