@@ -1,43 +1,54 @@
+"use client";
+
 import Image from "next/image";
+
+const LINE_HEIGHT = 120;
+const LINE_INSET = 24;
+const CORNER = 8;
+const STEP_START = 130;
+/** Pull each chained step up so its number sits on the previous rail. */
+const STEP_CHAIN_NUDGE = 12;
+
+const SECTION_MAX = 1440;
+const RIGHT_INSET = 50;
+const LEFT_INSET = 40;
 
 const steps = [
   {
     number: "1",
     title: "Smarter design, better outcomes",
     body: "We evaluate materials and methods early to maximise value and cut unnecessary cost.",
-    left: 141,
-    top: 138,
     numberLeft: 112,
-    numberTop: 138,
+    textLeft: 141,
+    rail: 248,
   },
   {
     number: "2",
     title: "From concept to precision",
     body: "Ideas become drawings and plans, evolving from concepts to designs, bringing visions to life.",
-    left: 406,
-    top: 254,
     numberLeft: 376,
-    numberTop: 254,
+    textLeft: 406,
+    rail: 294,
   },
   {
     number: "3",
     title: "The right partners",
     body: "We choose and manage the best makers and contractors for each project.",
-    left: 712,
-    top: 368,
     numberLeft: 686,
-    numberTop: 368,
+    textLeft: 712,
+    rail: 294,
   },
   {
     number: "4",
     title: "Full turnkey delivery",
     body: "We manage sourcing, production, and installation. Every step is handled from start to finish. Your project is in good hands with us.",
-    left: 1021,
-    top: 476,
     numberLeft: 996,
-    numberTop: 476,
+    textLeft: 1021,
+    rail: 0,
   },
 ] as const;
+
+const CONTENT_WIDTH = SECTION_MAX - LEFT_INSET - RIGHT_INSET;
 
 export function ProcessSection() {
   return (
@@ -55,51 +66,68 @@ export function ProcessSection() {
         />
       </div>
 
-      <div className="absolute left-[50px] top-[114px] h-[618px] w-[1340px]">
-        <h2 className="absolute left-0 top-[-30px] w-[352px] font-display text-[48px] leading-[1.2] uppercase text-white">
-          We handle all the complexity
-        </h2>
+      <div
+        className="absolute inset-x-0 top-[114px] mx-auto h-[618px] max-w-[1440px]"
+        style={{ paddingLeft: LEFT_INSET, paddingRight: RIGHT_INSET }}
+      >
+        <div className="relative h-full" style={{ width: CONTENT_WIDTH }}>
+          <h2 className="absolute left-0 top-[-30px] w-[352px] font-display text-[48px] leading-[1.2] uppercase text-white">
+            We handle all the complexity
+          </h2>
 
-        {steps.map((step) => (
-          <div key={step.number}>
-            <p
-              className="absolute font-[family-name:var(--font-instrument)] text-xl font-medium leading-[1.2] text-white"
-              style={{ left: step.numberLeft, top: step.numberTop }}
-            >
-              {step.number}
-            </p>
-            <div
-              className="absolute flex w-[319px] flex-col gap-3 leading-[1.2]"
-              style={{ left: step.left, top: step.top }}
-            >
-              <p className="font-[family-name:var(--font-instrument)] text-xl font-medium text-white">
-                {step.title}
+          {steps.map((step, i) => {
+          // Each step starts where the previous connector ends.
+          const top =
+            STEP_START + i * (LINE_INSET + LINE_HEIGHT - STEP_CHAIN_NUDGE);
+          const hasNext = i < steps.length - 1;
+          const svgTop = top + LINE_INSET;
+          const svgH = LINE_HEIGHT;
+          const vertEnd = svgH - CORNER;
+          const svgW = step.rail + CORNER;
+          const svgLeft = step.numberLeft + 5;
+
+          return (
+            <div key={step.number}>
+              <p
+                className="absolute font-[family-name:var(--font-instrument)] text-xl font-medium leading-[1.2] text-white"
+                style={{ left: step.numberLeft, top }}
+              >
+                {step.number}
               </p>
-              <p className="font-[family-name:var(--font-instrument)] text-lg text-white/80">
-                {step.body}
-              </p>
+
+              <div
+                className="absolute flex w-[319px] flex-col gap-3 leading-[1.2]"
+                style={{ left: step.textLeft, top }}
+              >
+                <p className="font-[family-name:var(--font-instrument)] text-xl font-medium text-white">
+                  {step.title}
+                </p>
+                <p className="font-[family-name:var(--font-instrument)] text-lg text-white/80">
+                  {step.body}
+                </p>
+              </div>
+
+              {hasNext ? (
+                <svg
+                  className="pointer-events-none absolute overflow-visible"
+                  style={{ left: svgLeft, top: svgTop }}
+                  width={svgW}
+                  height={svgH}
+                  viewBox={`0 0 ${svgW} ${svgH}`}
+                  fill="none"
+                  aria-hidden
+                >
+                  <path
+                    d={`M0.5 0V${vertEnd}C0.5 ${vertEnd + CORNER * 0.55} ${CORNER * 0.45} ${svgH} ${CORNER} ${svgH}H${svgW}`}
+                    stroke="white"
+                    strokeOpacity="0.4"
+                  />
+                </svg>
+              ) : null}
             </div>
-          </div>
-        ))}
-
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/icons/vector-1.svg"
-          alt=""
-          className="absolute left-[117px] top-[162px] h-[102px] w-[248px]"
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/icons/vector-2.svg"
-          alt=""
-          className="absolute left-[382px] top-[278px] h-[102px] w-[294px]"
-        />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/icons/vector-3.svg"
-          alt=""
-          className="absolute left-[693px] top-[395px] h-[95px] w-[294px]"
-        />
+          );
+          })}
+        </div>
       </div>
     </section>
   );
