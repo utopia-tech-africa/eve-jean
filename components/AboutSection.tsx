@@ -4,8 +4,17 @@ import { Signature } from "@/components/Signature";
 
 export function AboutSection() {
   return (
-    <section className="relative flex h-[800px] w-full shrink-0 items-center justify-center bg-cream">
-      <div className="relative h-[663px] w-full max-w-[1340px]">
+    <section className="relative flex h-[800px] w-full shrink-0 items-center justify-center overflow-hidden bg-cream">
+      <Image
+        src="/images/satin-texture.png"
+        alt=""
+        fill
+        className="object-cover mix-blend-soft-light"
+        sizes="100vw"
+        aria-hidden
+      />
+
+      <div className="relative z-10 h-[663px] w-full max-w-[1340px]">
         <RevealMedia className="absolute left-0 top-0 h-[521px] w-[357px] overflow-hidden rounded">
           <Image
             src="/images/about-portrait.png"
