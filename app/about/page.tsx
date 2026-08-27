@@ -5,7 +5,7 @@ export default function AboutPage() {
         <p className="font-[family-name:var(--font-instrument)] text-sm tracking-wide text-ink/60">
           Eve Jean
         </p>
-        <h1 className="mt-2 font-[family-name:var(--font-display)] text-4xl uppercase text-ink">
+        <h1 className="mt-2 font-display text-4xl uppercase text-ink">
           About
         </h1>
       </div>

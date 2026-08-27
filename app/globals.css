@@ -20,15 +20,24 @@
   --font-montserrat: var(--font-montserrat);
 }
 
+/* Astetes display headings — 1px stroke matches fill via currentColor */
+@utility font-display {
+  font-family: var(--font-display), ui-serif, serif;
+  -webkit-text-stroke: 2px currentColor;
+  paint-order: stroke fill;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     background: var(--cream);
     color: var(--ink);
-    font-family: var(--font-instrument), system-ui, sans-serif;
+    font-family: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
+    overflow-x: hidden;
   }
 
   @media (prefers-reduced-motion: reduce) {

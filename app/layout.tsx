@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
-import {
-  Cormorant_Garamond,
-  Instrument_Sans,
-  Montserrat,
-} from "next/font/google";
+import { Instrument_Sans, Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const display = Cormorant_Garamond({
+const display = localFont({
+  src: "./fonts/Astetes.woff2",
   variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  display: "swap",
+  weight: "400",
 });
 
 const instrument = Instrument_Sans({
   variable: "--font-instrument",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: "variable",
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const montserrat = Montserrat({
@@ -40,7 +40,9 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${instrument.variable} ${montserrat.variable} h-full antialiased`}
     >
-      <body className="min-h-full overflow-x-auto bg-cream text-ink">
+      <body
+        className={`${instrument.className} min-h-full overflow-x-hidden bg-cream text-ink`}
+      >
         {children}
       </body>
     </html>

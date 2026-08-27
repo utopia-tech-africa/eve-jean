@@ -33,7 +33,7 @@ const projects = [
 
 export function WorkSection() {
   return (
-    <section className="relative h-[846px] w-full shrink-0 overflow-x-auto overflow-y-hidden bg-forest">
+    <section className="relative h-[846px] w-full shrink-0 overflow-hidden bg-forest">
       <div
         className="pointer-events-none absolute inset-0 mix-blend-soft-light"
         aria-hidden
@@ -47,7 +47,7 @@ export function WorkSection() {
         />
       </div>
 
-      <h2 className="absolute left-[50px] top-8 w-[318px] font-[family-name:var(--font-display)] text-[48px] leading-[1.2] uppercase text-white">
+      <h2 className="absolute left-[50px] top-8 w-[318px] font-display text-[48px] leading-[1.2] uppercase text-white">
         Work that speaks for us
       </h2>
 

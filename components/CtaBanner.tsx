@@ -3,7 +3,7 @@ import { ReachOutButton } from "./ReachOutButton";
 
 export function CtaBanner() {
   return (
-    <section className="relative mx-auto h-[316px] w-[1392px] shrink-0 overflow-hidden rounded-lg">
+    <section className="relative mx-auto h-[316px] w-full max-w-[1392px] shrink-0 overflow-hidden rounded-lg">
       <Image
         src="/images/cta-bg.png"
         alt=""
@@ -22,7 +22,7 @@ export function CtaBanner() {
         />
       </div>
 
-      <h2 className="absolute left-1/2 top-[116px] w-[754px] -translate-x-1/2 text-center font-[family-name:var(--font-display)] text-[48px] leading-[1.2] uppercase text-accent">
+      <h2 className="absolute left-1/2 top-[116px] w-[754px] -translate-x-1/2 text-center font-display text-[48px] leading-[1.2] uppercase text-accent">
         Every room begins with a single idea. Let&apos;s find yours
       </h2>
 

@@ -3,7 +3,7 @@ import Image from "next/image";
 export function AboutSection() {
   return (
     <section className="relative h-[800px] w-full shrink-0 bg-cream">
-      <div className="relative mx-auto h-[663px] w-[1340px]">
+      <div className="relative mx-auto h-[663px] w-full max-w-[1340px]">
         <div className="absolute left-0 top-0 h-[521px] w-[357px] overflow-hidden rounded">
           <Image
             src="/images/about-portrait.png"
@@ -25,7 +25,7 @@ export function AboutSection() {
         </div>
 
         <div className="absolute left-1/2 top-1/2 flex w-[563px] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3 text-center leading-[1.2]">
-          <h2 className="font-[family-name:var(--font-display)] text-[32px] uppercase text-ink">
+          <h2 className="font-display text-[32px] uppercase text-ink">
             Every space begins as an idea. Craft is what makes it feel true.
           </h2>
           <p className="font-[family-name:var(--font-instrument)] text-lg text-[rgba(21,21,21,0.8)]">
