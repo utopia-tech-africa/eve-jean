@@ -122,25 +122,25 @@ export function CtaBanner() {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-auto h-[316px] w-full max-w-[1392px] shrink-0 overflow-hidden rounded-lg"
+      className="relative mx-4 flex min-h-[360px] w-auto max-w-[1392px] shrink-0 flex-col items-center justify-center gap-6 overflow-hidden rounded-lg px-4 py-10 md:mx-auto md:h-[316px] md:w-full md:gap-0 md:px-0 md:py-0"
     >
       <Image
         src="/images/cta-bg.png"
         alt=""
         fill
         className="object-cover opacity-80"
-        sizes="1392px"
+        sizes="(max-width: 768px) 100vw, 1392px"
       />
       <div className="absolute inset-0 rounded-lg bg-black/5" aria-hidden />
 
-      <div className="absolute left-1/2 top-8 flex -translate-x-1/2 items-start justify-center">
+      <div className="relative z-10 flex shrink-0 items-start justify-center md:absolute md:left-1/2 md:top-8 md:-translate-x-1/2">
         <svg
           width="41"
           height="65"
           viewBox="0 0 41 65"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="h-[65px] w-[41px]"
+          className="h-[52px] w-[33px] md:h-[65px] md:w-[41px]"
           aria-hidden
         >
           {logoPaths.map((d, i) => (
@@ -157,14 +157,14 @@ export function CtaBanner() {
       </div>
 
       <h2
-        className="absolute left-1/2 top-[116px] w-[754px] -translate-x-1/2 text-center font-display text-[48px] leading-[1.2] uppercase text-accent"
+        className="relative z-10 max-w-[754px] text-center font-display text-[28px] leading-[1.2] uppercase text-accent sm:text-[36px] md:absolute md:left-1/2 md:top-[116px] md:w-[754px] md:-translate-x-1/2 md:text-[48px]"
         style={revealStyle(contentVisible || reduceMotion)}
       >
         Every room begins with a single idea. Let&apos;s find yours
       </h2>
 
       <div
-        className="absolute left-1/2 top-[246px] -translate-x-1/2"
+        className="relative z-10 md:absolute md:left-1/2 md:top-[246px] md:-translate-x-1/2"
         style={revealStyle(contentVisible || reduceMotion, 120)}
       >
         <ReachOutButton variant="cta" />
