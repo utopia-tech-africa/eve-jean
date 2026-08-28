@@ -145,7 +145,7 @@ export function ProcessSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative h-[846px] w-full shrink-0 overflow-hidden bg-forest"
+      className="relative w-full shrink-0 overflow-hidden bg-forest px-4 py-12 md:h-[846px] md:px-0 md:py-0"
     >
       <div
         className="pointer-events-none absolute inset-0 mix-blend-soft-light"
@@ -160,8 +160,44 @@ export function ProcessSection() {
         />
       </div>
 
+      <div className="relative z-10 mx-auto max-w-[1440px] md:hidden">
+        <h2 className="mb-8 max-w-[352px] font-display text-[32px] leading-[1.2] uppercase text-white sm:text-[40px]">
+          We handle all the complexity
+        </h2>
+
+        <div className="flex flex-col gap-10">
+          {steps.map((step, i) => {
+            const isRevealed = revealedSteps > i;
+
+            return (
+              <div
+                key={step.number}
+                className="border-l border-white/20 pl-4 transition-[opacity,transform] ease-[cubic-bezier(0.23,1,0.32,1)]"
+                style={{
+                  opacity: isRevealed ? 1 : 0,
+                  transform: isRevealed ? "translateY(0)" : "translateY(10px)",
+                  transitionDuration: `${STEP_REVEAL_MS}ms`,
+                }}
+              >
+                <p className="mb-3 font-[family-name:var(--font-instrument)] text-lg font-medium text-white/60">
+                  {step.number}
+                </p>
+                <div className="flex flex-col gap-2 leading-[1.2]">
+                  <p className="font-[family-name:var(--font-instrument)] text-lg font-medium text-white">
+                    {step.title}
+                  </p>
+                  <p className="font-[family-name:var(--font-instrument)] text-base text-white/80">
+                    {step.body}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
       <div
-        className="absolute inset-x-0 top-[114px] mx-auto h-[618px] max-w-[1440px]"
+        className="absolute inset-x-0 top-[114px] mx-auto hidden h-[618px] max-w-[1440px] md:block"
         style={{ paddingLeft: LEFT_INSET, paddingRight: RIGHT_INSET }}
       >
         <div className="relative h-full" style={{ width: CONTENT_WIDTH }}>

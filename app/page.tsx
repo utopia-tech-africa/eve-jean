@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center overflow-x-hidden bg-cream">
       <SiteNav />
-      <div className="flex w-full flex-col gap-20">
+      <div className="flex w-full flex-col gap-10 md:gap-20">
         <div data-snap-section className="w-full">
           <Hero />
         </div>

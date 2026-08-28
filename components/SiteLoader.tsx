@@ -110,7 +110,7 @@ export function SiteLoader() {
       aria-valuenow={progress}
     >
       <div
-        className="relative h-[181px] w-[262px] shrink-0"
+        className="relative mx-4 h-[140px] w-[200px] shrink-0 scale-[0.85] sm:scale-100 md:mx-0 md:h-[181px] md:w-[262px]"
         style={{
           opacity: logoVisible ? 1 : 0,
           filter: logoVisible ? "blur(0px)" : "blur(24px)",
@@ -146,7 +146,7 @@ export function SiteLoader() {
       </div>
 
       <p
-        className="absolute bottom-[1.5%] right-[2.3%] font-[family-name:var(--font-display)] text-[clamp(4rem,9.86vw,142px)] leading-none text-[#dad2c9] tabular-nums"
+        className="absolute bottom-6 right-4 font-[family-name:var(--font-display)] text-[clamp(3rem,12vw,142px)] leading-none text-[#dad2c9] tabular-nums md:bottom-[1.5%] md:right-[2.3%]"
         aria-live="polite"
       >
         {progress}%

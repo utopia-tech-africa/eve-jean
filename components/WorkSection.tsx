@@ -52,14 +52,27 @@ export function WorkSection() {
   );
   const lenisRef = useRef<Lenis | null>(null);
   const rafRef = useRef<number>(0);
+  const mobileWrapperRef = useRef<HTMLDivElement>(null);
+  const mobileTrackRef = useRef<HTMLDivElement>(null);
+  const mobileRafRef = useRef<number>(0);
+  const mobileSetWidthRef = useRef(0);
   const reducedMotionRef = useRef(false);
   const wrappingRef = useRef(false);
 
   const [reducedMotion, setReducedMotion] = useState(false);
   const [expandedCards, setExpandedCards] = useState<number[]>([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const totalCards = projects.length * SET_COUNT;
   const setLen = projects.length;
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const sync = () => setIsMobile(media.matches);
+    sync();
+    media.addEventListener("change", sync);
+    return () => media.removeEventListener("change", sync);
+  }, []);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -78,6 +91,8 @@ export function WorkSection() {
   }, []);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const wrapper = wrapperRef.current;
     const content = contentRef.current;
     if (!wrapper || !content) return;
@@ -304,7 +319,60 @@ export function WorkSection() {
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [totalCards, setLen]);
+  }, [isMobile, totalCards, setLen]);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const wrapper = mobileWrapperRef.current;
+    const track = mobileTrackRef.current;
+    if (!wrapper || !track) return;
+
+    const measureSetWidth = () => {
+      mobileSetWidthRef.current = track.scrollWidth / SET_COUNT;
+      wrapper.scrollLeft = mobileSetWidthRef.current;
+    };
+
+    measureSetWidth();
+
+    let paused = false;
+    const pause = () => {
+      paused = true;
+    };
+    const resume = () => {
+      paused = false;
+    };
+
+    wrapper.addEventListener("touchstart", pause, { passive: true });
+    wrapper.addEventListener("touchend", resume, { passive: true });
+    wrapper.addEventListener("touchcancel", resume, { passive: true });
+
+    const tick = () => {
+      if (!reducedMotionRef.current && !paused) {
+        wrapper.scrollLeft += AUTOPLAY_STEP;
+        const setWidth = mobileSetWidthRef.current;
+        if (setWidth > 0 && wrapper.scrollLeft >= setWidth * 2) {
+          wrapper.scrollLeft -= setWidth;
+        } else if (setWidth > 0 && wrapper.scrollLeft < setWidth * 0.25) {
+          wrapper.scrollLeft += setWidth;
+        }
+      }
+      mobileRafRef.current = requestAnimationFrame(tick);
+    };
+
+    mobileRafRef.current = requestAnimationFrame(tick);
+
+    const ro = new ResizeObserver(measureSetWidth);
+    ro.observe(track);
+
+    return () => {
+      cancelAnimationFrame(mobileRafRef.current);
+      ro.disconnect();
+      wrapper.removeEventListener("touchstart", pause);
+      wrapper.removeEventListener("touchend", resume);
+      wrapper.removeEventListener("touchcancel", resume);
+    };
+  }, [isMobile]);
 
   const slides = Array.from({ length: SET_COUNT }, (_, set) =>
     projects.map((project, i) => ({
@@ -315,7 +383,7 @@ export function WorkSection() {
   ).flat();
 
   return (
-    <section className="relative flex h-screen w-full shrink-0 flex-col gap-6 overflow-hidden bg-forest">
+    <section className="relative flex min-h-[100dvh] w-full shrink-0 flex-col gap-6 overflow-hidden bg-forest md:h-screen">
       <div
         className="pointer-events-none absolute inset-0 mix-blend-soft-light"
         aria-hidden
@@ -329,17 +397,49 @@ export function WorkSection() {
         />
       </div>
 
-      <h2 className="relative z-10 max-w-[450px] shrink-0 px-[50px] pt-8 font-display text-[48px] leading-[1.2] uppercase text-white">
+      <h2 className="relative z-10 max-w-[450px] shrink-0 px-4 pt-6 font-display text-[32px] leading-[1.2] uppercase text-white sm:text-[40px] md:px-[50px] md:pt-8 md:text-[48px]">
         Work that speaks for us
       </h2>
 
+      {/* Mobile: autoplay carousel */}
+      <div
+        ref={mobileWrapperRef}
+        className="relative z-10 min-h-0 flex-1 overflow-x-auto overflow-y-hidden pb-8 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] md:hidden [&::-webkit-scrollbar]:hidden"
+      >
+        <div ref={mobileTrackRef} className="flex w-max items-end gap-4 px-4">
+          {Array.from({ length: SET_COUNT }, (_, set) =>
+            projects.map((project) => (
+              <figure
+                key={`${set}-${project.name}`}
+                className="relative flex w-[min(280px,calc(100vw-2rem))] shrink-0 flex-col gap-3"
+              >
+                <div className="relative aspect-[357/521] w-full overflow-hidden rounded">
+                  <Image
+                    src={project.src}
+                    alt={project.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 280px, 357px"
+                    draggable={false}
+                  />
+                </div>
+                <figcaption className="truncate font-[family-name:var(--font-instrument)] text-lg leading-[1.2] text-white">
+                  {project.name}
+                </figcaption>
+              </figure>
+            )),
+          ).flat()}
+        </div>
+      </div>
+
+      {/* Desktop: Lenis autoplay carousel */}
       <div
         ref={wrapperRef}
-        className="pointer-events-none relative z-10 min-h-0 flex-1 overflow-x-hidden overflow-y-hidden pb-[30px] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="pointer-events-none relative z-10 hidden min-h-0 flex-1 overflow-x-hidden overflow-y-hidden pb-[30px] [scrollbar-width:none] md:block [&::-webkit-scrollbar]:hidden"
       >
         <div
           ref={contentRef}
-          className="relative flex h-full w-max items-end gap-8 px-[50px]"
+          className="relative flex h-full w-max items-end gap-6 px-4 md:gap-8 md:px-[50px]"
         >
           {slides.map((slide) => {
             const isFocus =

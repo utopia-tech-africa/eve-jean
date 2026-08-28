@@ -14,7 +14,7 @@ const FOOTER_VIDEO =
 
 export function SiteFooter() {
   return (
-    <footer className="relative flex h-[646px] w-full shrink-0 flex-col items-center overflow-hidden px-[50px] pb-3 pt-[60px]">
+    <footer className="relative flex min-h-[520px] w-full shrink-0 flex-col items-center overflow-hidden px-4 pb-6 pt-10 md:h-[646px] md:px-[50px] md:pb-3 md:pt-[60px]">
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src={FOOTER_VIDEO}
@@ -30,8 +30,8 @@ export function SiteFooter() {
         aria-hidden
       />
 
-      <div className="relative z-10 flex w-full max-w-[1280px] flex-col items-center gap-10">
-        <div className="flex w-full items-start justify-between">
+      <div className="relative z-10 flex w-full max-w-[1280px] flex-col items-center gap-8 md:gap-10">
+        <div className="flex w-full flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div className="relative h-[78px] w-[113px]" aria-label="Eve Jean Interiors">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -125,8 +125,8 @@ export function SiteFooter() {
             </svg>
           </div>
 
-          <div className="flex gap-12">
-            <div className="flex w-[153px] flex-col gap-4">
+          <div className="flex flex-col gap-10 sm:flex-row sm:gap-12">
+            <div className="flex w-full flex-col gap-4 sm:w-[153px]">
               <p className="font-[family-name:var(--font-instrument)] text-lg font-bold leading-[33px] text-white">
                 Menu
               </p>
@@ -201,10 +201,11 @@ export function SiteFooter() {
           />
         </div>
 
-        <div className="flex items-center gap-6 font-[family-name:var(--font-instrument)] text-sm text-white/60">
+        <div className="flex flex-col items-start gap-4 font-[family-name:var(--font-instrument)] text-sm text-white/60 md:flex-row md:items-center md:gap-6">
           <p className="leading-[1.3]">
             © 2026 Utopia Tech Studio. Inc All rights reserved.
           </p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
           <button
             type="button"
             aria-disabled="true"
@@ -226,6 +227,7 @@ export function SiteFooter() {
           >
             Cookies settings
           </button>
+          </div>
         </div>
       </div>
     </footer>
